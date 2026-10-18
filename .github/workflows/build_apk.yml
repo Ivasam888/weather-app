@@ -28,7 +28,7 @@ jobs:
         run: flutter pub get
 
       - name: Create Android Project Structure
-        run: flutter create . --platforms=android --org=com.weather.app
+        run: flutter create . --platforms=android --org=com.weather.app --project-name=weather_app
 
       - name: Build APK
         run: flutter build apk --release --no-tree-shake-icons
