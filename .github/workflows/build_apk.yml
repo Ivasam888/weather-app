@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Web & Web-APK
 
 on:
   push:
@@ -10,31 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.2'
           channel: 'stable'
-          cache: true
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Create Android Project Structure
-        run: flutter create . --platforms=android --org=com.weather.app --project-name=weather_app
+      - name: Build Web App
+        run: flutter build web --release
 
-      - name: Build APK
-        run: flutter build apk --release --no-tree-shake-icons
-
-      - name: Upload APK Artifact
+      - name: Upload Web Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-release
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: weather-app-web
+          path: build/web
