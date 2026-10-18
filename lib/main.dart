@@ -31,11 +31,11 @@ class WeatherHomeScreen extends StatefulWidget {
   const WeatherHomeScreen({super.key});
 
   @override
-  Widget state() => _WeatherHomeScreenState();
+  State<WeatherHomeScreen> createState() => _WeatherHomeScreenState();
 }
 
 class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
-  int _selectedDayIndex = 0; // 0 = Завтра, 1 = Через день, 2 = 3-й день
+  int _selectedDayIndex = 0; 
   String _cityName = 'Москва';
   double _lat = 55.7558;
   double _lon = 37.6173;
@@ -59,8 +59,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
     try {
       final openMeteoUrl = Uri.parse(
         'https://api.open-meteo.com/v1/forecast?latitude=$_lat&longitude=$_lon'
-        '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,wind_speed_10m_max'
-        '&hourly=relative_humidity_2m,surface_pressure'
+        '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max'
         '&timezone=auto',
       );
       final omRes = await http.get(openMeteoUrl);
